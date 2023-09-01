@@ -78,7 +78,7 @@ func action(c *cli.Context) error {
 		// print name in bold
 		fmt.Printf("\n\033[1m%s\033[0m\n", name)
 		fmt.Printf("APR: %51.8f%%\n", apr.Value()*100.0)
-		fmt.Printf("Difference from simple APR: %15.8f%%\n", apr.Diff()*100.0)
+		fmt.Printf("Difference from simple APR: %28.8f%%\n", apr.Diff()*100.0)
 		fmt.Printf("Percentage of tolerance level of 1/8 of 1%%: %12.8f%%\n", apr.PercentageOfAllowedThreshold()*100.0)
 		var withinTolerance = "YES"
 		if apr.OverThreshold() {
