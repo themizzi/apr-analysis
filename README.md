@@ -73,13 +73,13 @@ Simple APR: 10.000000%
 
 Bisection Method (Simple Formula)
 APR:                                          9.99999046%
-Difference from simple APR:      0.00000954%
+Difference from simple APR:                   0.00000954%
 Percentage of tolerance level of 1/8 of 1%:   0.00762939%
 Difference is within tolerance of 1/8 of 1%:          YES
 
 BiSection Method (Actual Payments)
 APR:                                          9.97061729%
-Difference from simple APR:      0.02938271%
+Difference from simple APR:                   0.02938271%
 Percentage of tolerance level of 1/8 of 1%:  23.50616455%
 Difference is within tolerance of 1/8 of 1%:          YES
 ```
