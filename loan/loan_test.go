@@ -40,32 +40,8 @@ func TestPayments(t *testing.T) {
 func TestSimpleAPR(t *testing.T) {
 	loan := NewLoan(1000, 0.1, 12, time.Date(2022, 1, 1, 0, 0, 0, 0, time.UTC), 30, 0, 0.0, 0.5, 0.0001)
 
-	if math.Abs((loan.SimpleAPR()).Value()-0.10) > 0.000001 {
-		t.Errorf("SimpleAPR() = %f; want 0.10", loan.SimpleAPR().Value())
-	}
-}
-
-func TestSimpleAPRPercentageOfAllowedThreshold(t *testing.T) {
-	loan := NewLoan(1000, 0.1, 12, time.Date(2022, 1, 1, 0, 0, 0, 0, time.UTC), 30, 0, 0.0, 0.5, 0.0001)
-
-	if math.Abs(loan.SimpleAPR().PercentageOfAllowedThreshold()-0.0) > 0.000001 {
-		t.Errorf("SimpleAPR().PercentageOfAllowedThreshold() = %f; want 0.0", loan.SimpleAPR().PercentageOfAllowedThreshold())
-	}
-}
-
-func TestSimpleAPRDiff(t *testing.T) {
-	loan := NewLoan(1000, 0.1, 12, time.Date(2022, 1, 1, 0, 0, 0, 0, time.UTC), 30, 0, 0.0, 0.5, 0.0001)
-
-	if math.Abs(loan.SimpleAPR().Diff()-0.0) > 0.00000001 {
-		t.Errorf("SimpleAPR().Diff() = %f; want 0.0", loan.SimpleAPR().Diff())
-	}
-}
-
-func TestSimpleAPROverThreshold(t *testing.T) {
-	loan := NewLoan(1000, 0.1, 12, time.Date(2022, 1, 1, 0, 0, 0, 0, time.UTC), 30, 0, 0.0, 0.5, 0.0001)
-
-	if loan.SimpleAPR().OverThreshold() {
-		t.Errorf("SimpleAPR().OverThreshold() = %t; want false", loan.SimpleAPR().OverThreshold())
+	if math.Abs((loan.SimpleAPR())-0.10) > 0.000001 {
+		t.Errorf("SimpleAPR() = %f; want 0.10", loan.SimpleAPR())
 	}
 }
 

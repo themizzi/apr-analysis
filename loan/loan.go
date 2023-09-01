@@ -49,7 +49,7 @@ type Loan struct {
 	totalInterest         float64
 	bisectionSimpleAPR    APR
 	bisectionActualAPR    APR
-	simpleAPR             APR
+	simpleAPR             float64
 }
 
 func (l *Loan) Principal() float64 {
@@ -96,8 +96,8 @@ func (l *Loan) BisectionActualAPR() *APR {
 	return &l.bisectionActualAPR
 }
 
-func (l *Loan) SimpleAPR() *APR {
-	return &l.simpleAPR
+func (l *Loan) SimpleAPR() float64 {
+	return l.simpleAPR
 }
 
 func monthlyPayment(principal float64, rate float64, term int) float64 {
@@ -213,12 +213,12 @@ func NewLoan(loanAmount float64, nominalRate float64, term int, startDate time.T
 		totalInterest += payment.InterestAmount()
 	}
 
-	bisectSimpleAPR := bisect(lowerAPRBound, upperAPRBound, aprThreshold, simplePresentValue(loanAmount, nominalRate, term, monthlyPayment, finalPayment, daysUntilFirstPayment))
-	bisectSimpleAPRDiff := math.Abs(bisectSimpleAPR - nominalRate)
-	bisectActualAPR := bisect(lowerAPRBound, upperAPRBound, aprThreshold, actualPresentValue(loanAmount, nominalRate, term, payments, startDate))
-	bisectActualAPRDiff := math.Abs(bisectActualAPR - nominalRate)
 	simpleAPR := simpleAPR(loanAmount, monthlyPayment, term, nominalRate)
-	simpleAPRDiff := math.Abs(simpleAPR - nominalRate)
+	bisectSimpleAPR := bisect(lowerAPRBound, upperAPRBound, aprThreshold, simplePresentValue(loanAmount, nominalRate, term, monthlyPayment, finalPayment, daysUntilFirstPayment))
+	bisectSimpleAPRDiff := math.Abs(bisectSimpleAPR - simpleAPR)
+	bisectActualAPR := bisect(lowerAPRBound, upperAPRBound, aprThreshold, actualPresentValue(loanAmount, nominalRate, term, payments, startDate))
+	bisectActualAPRDiff := math.Abs(bisectActualAPR - simpleAPR)
+
 	regZThreshold := 0.01 / 8.0
 
 	return &Loan{
@@ -232,6 +232,6 @@ func NewLoan(loanAmount float64, nominalRate float64, term int, startDate time.T
 		totalInterest:         totalInterest,
 		bisectionSimpleAPR:    *NewAPR(bisectSimpleAPR, bisectSimpleAPRDiff, bisectSimpleAPRDiff/(1.0/800), bisectSimpleAPRDiff > regZThreshold),
 		bisectionActualAPR:    *NewAPR(bisectActualAPR, bisectActualAPRDiff, bisectActualAPRDiff/(1.0/800), bisectActualAPRDiff > regZThreshold),
-		simpleAPR:             *NewAPR(simpleAPR, simpleAPRDiff, simpleAPRDiff/(1.0/800), simpleAPRDiff > regZThreshold),
+		simpleAPR:             simpleAPR,
 	}
 }
