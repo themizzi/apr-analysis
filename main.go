@@ -44,17 +44,6 @@ func main() {
 				Usage: "The number of days until the first payment is due",
 				Value: 30,
 			},
-			&cli.StringFlag{
-				Name:  "apr-calculation-method",
-				Usage: "The method to use to calculate the APR",
-				Value: "bisection",
-				Action: func(ctx *cli.Context, v string) error {
-					if v != "bisection" && v != "actual" {
-						return fmt.Errorf("invalid APR calculation method: %s", v)
-					}
-					return nil
-				},
-			},
 		},
 		Action: action,
 	}
