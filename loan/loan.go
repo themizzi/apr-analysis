@@ -88,16 +88,16 @@ func (l *Loan) TotalInterest() float64 {
 	return l.totalInterest
 }
 
-func (l *Loan) BisectionSimpleAPR() APR {
-	return l.bisectionSimpleAPR
+func (l *Loan) BisectionSimpleAPR() *APR {
+	return &l.bisectionSimpleAPR
 }
 
-func (l *Loan) BisectionActualAPR() APR {
-	return l.bisectionActualAPR
+func (l *Loan) BisectionActualAPR() *APR {
+	return &l.bisectionActualAPR
 }
 
-func (l *Loan) SimpleAPR() APR {
-	return l.simpleAPR
+func (l *Loan) SimpleAPR() *APR {
+	return &l.simpleAPR
 }
 
 func monthlyPayment(principal float64, rate float64, term int) float64 {

@@ -74,7 +74,7 @@ func action(c *cli.Context) error {
 
 	fmt.Printf("\n\033[1mTotal Interest Paid:\033[0m $%.2f\n", theLoan.TotalInterest())
 
-	printAPR := func(apr loan.APR, name string) {
+	printAPR := func(apr *loan.APR, name string) {
 		// print name in bold
 		fmt.Printf("\n\033[1m%s\033[0m\n", name)
 		fmt.Printf("APR: %51.8f%%\n", apr.Value()*100.0)
