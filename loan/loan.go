@@ -230,8 +230,8 @@ func NewLoan(loanAmount float64, nominalRate float64, term int, startDate time.T
 		daysUntilFirstPayment: daysUntilFirstPayment,
 		finalPayment:          finalPayment,
 		totalInterest:         totalInterest,
-		bisectionSimpleAPR:    *NewAPR(bisectSimpleAPR, bisectSimpleAPRDiff, bisectSimpleAPRDiff/(1.0/800), bisectSimpleAPRDiff > regZThreshold),
-		bisectionActualAPR:    *NewAPR(bisectActualAPR, bisectActualAPRDiff, bisectActualAPRDiff/(1.0/800), bisectActualAPRDiff > regZThreshold),
+		bisectionSimpleAPR:    *NewAPR(bisectSimpleAPR, bisectSimpleAPRDiff, bisectSimpleAPRDiff/regZThreshold, bisectSimpleAPRDiff > regZThreshold),
+		bisectionActualAPR:    *NewAPR(bisectActualAPR, bisectActualAPRDiff, bisectActualAPRDiff/regZThreshold, bisectActualAPRDiff > regZThreshold),
 		simpleAPR:             simpleAPR,
 	}
 }
