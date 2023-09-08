@@ -17,8 +17,8 @@ func TestMonthlyPayment(t *testing.T) {
 
 func TestTotalInterest(t *testing.T) {
 	loan := NewLoan(1000, 0.1, 12, time.Date(2021, 1, 1, 0, 0, 0, 0, time.UTC), 30, 0, 0.0, 0.5, 0.0001)
-	if math.Abs(loan.TotalInterest()-109.981294) > 0.000001 {
-		t.Errorf("TotalInterest() = %f; want 109.981294", loan.TotalInterest())
+	if math.Abs(loan.TotalInterest()-54.990647) > 0.000001 {
+		t.Errorf("TotalInterest() = %f; want 54.990647", loan.TotalInterest())
 	}
 }
 

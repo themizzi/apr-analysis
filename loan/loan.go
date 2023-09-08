@@ -209,9 +209,6 @@ func NewLoan(loanAmount float64, nominalRate float64, term int, startDate time.T
 		finalPayment = monthlyPayment
 	}
 	payments, totalInterest := calculatePayments(loanAmount, startDate, daysUntilFirstPayment, nominalRate, term, finalPayment, nextPaymentDateWithEndOfMonth)
-	for _, payment := range payments {
-		totalInterest += payment.InterestAmount()
-	}
 
 	simpleAPR := simpleAPR(loanAmount, monthlyPayment, term, nominalRate)
 	bisectSimpleAPR := bisect(lowerAPRBound, upperAPRBound, aprThreshold, simplePresentValue(loanAmount, nominalRate, term, monthlyPayment, finalPayment, daysUntilFirstPayment))
